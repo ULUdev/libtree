@@ -1,0 +1,6 @@
+libtree.so
+test/mock
+compile_commands.json
+*.o
+*\~
+.cache
