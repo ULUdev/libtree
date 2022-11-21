@@ -1,8 +1,9 @@
 CC = gcc
-CFLAGS = -std=c11 -fPIC -c -Wall -Iinclude -ggdb
+CFLAGS = -std=c11 -fPIC -c -Wall -Iinclude -O3
 LD = ld
 LDFLAGS = -shared
 SRC = $(wildcard src/*.c)
+PREFIX = /usr/local
 
 all: libtree.so
 
@@ -17,3 +18,6 @@ tests: test/mock
 
 test/mock: $(wildcard test/*.c) libtree.so
 	$(MAKE) -C test
+
+install: libtree.so
+	mv libtree.so $(PREFIX)/lib/
