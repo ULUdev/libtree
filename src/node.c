@@ -13,7 +13,7 @@ tree_node_t *tree_node_new(const char *label, void *value) {
 }
 void tree_node_set_label(tree_node_t *node, const char *label) {
     node->label = realloc(node->label, strlen(label) + 1);
-    strncpy(node->label, label, strlen(label) + 1);
+    strcpy(node->label, label);
 }
 void tree_node_set_value(tree_node_t *node, void *value) {
     node->value = value;

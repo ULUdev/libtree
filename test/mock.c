@@ -3,8 +3,25 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <cmocka.h>
+#include <string.h>
 #include "node.h"
 #include "tree.h"
+
+static void node_create(void **state) {
+    tree_node_t *node = tree_node_new("Hello, World", NULL);
+    assert_non_null(node);
+    tree_node_destroy(node);
+}
+
+// test whether or not the label is actually copied
+static void node_label_cpy(void **state) {
+    char *label = malloc(4);
+    strcpy(label, "abc");
+    tree_node_t *node = tree_node_new(label, NULL);
+    assert_non_null(node);
+    free(label);
+    assert_string_equal(node->label, "abc");
+}
 
 static void tree_create(void **state) {
     tree_t *tree = tree_new();
@@ -26,6 +43,8 @@ static void tree_add_and_find_node(void **state) {
 
 int main(void) {
     const struct CMUnitTest tests[] = {
+        cmocka_unit_test(node_create),
+        cmocka_unit_test(node_label_cpy),
         cmocka_unit_test(tree_create),
         cmocka_unit_test(tree_add_and_find_node),
     };
