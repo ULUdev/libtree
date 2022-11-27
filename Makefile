@@ -16,7 +16,7 @@ libtree.so: $(SRC:.c=.o)
 tests: test/mock
 	LD_LIBRARY_PATH="$$LD_LIBRARY_PATH:$$PWD" ./test/mock
 
-test/mock: $(wildcard test/*.c) libtree.so
+test/mock: $(wildcard test/*.c)
 	$(MAKE) -C test
 
 install: libtree.so

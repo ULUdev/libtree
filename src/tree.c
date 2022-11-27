@@ -64,7 +64,9 @@ int tree_add_node(tree_t *tree, const char *label, void *value) {
     }
 }
 tree_node_t *tree_get_node(tree_t *tree, const char *label) {
+    // tree has no nodes
     if (!tree->root) return NULL;
+    // label has invalid format
     if (label[0] == '.') return NULL;
     char *buf = malloc(strlen(label)+1);
     memset(buf, '\0', strlen(label)+1);
@@ -78,7 +80,7 @@ tree_node_t *tree_get_node(tree_t *tree, const char *label) {
                     break;
                 }
             }
-            if (!child) break;
+            if (!child) return NULL;
             else node = child;
         }
         buf[i] = label[i];

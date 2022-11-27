@@ -41,12 +41,20 @@ static void tree_add_and_find_node(void **state) {
     tree_destroy(tree);
 }
 
+static void tree_get_nonexistent_node(void **state) {
+    tree_t *tree = tree_new();
+    tree_add_node(tree, ".", NULL);
+    assert_null(tree_get_node(tree, "non.existent.node"));
+    tree_destroy(tree);
+}
+
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(node_create),
         cmocka_unit_test(node_label_cpy),
         cmocka_unit_test(tree_create),
         cmocka_unit_test(tree_add_and_find_node),
+        cmocka_unit_test(tree_get_nonexistent_node),
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
