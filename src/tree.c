@@ -70,24 +70,25 @@ tree_node_t *tree_get_node(tree_t *tree, const char *label) {
     if (label[0] == '.') return NULL;
     char *buf = malloc(strlen(label)+1);
     memset(buf, '\0', strlen(label)+1);
-    tree_node_t *node = tree->root;
+    tree_node_t *curnode = tree->root;
     for (int i=0;i<strlen(label);i++) {
         if (label[i] == '.') {
             tree_node_t *child = NULL;
-            for (int j=0;j<node->numchildren;j++) {
-                if(streq(node->children[j]->label, buf)) {
-                    child = node->children[j];
+            for (int j=0;j<curnode->numchildren;j++) {
+                if(streq(curnode->children[j]->label, buf)) {
+                    child = curnode->children[j];
                     break;
                 }
             }
             if (!child) return NULL;
-            else node = child;
+            else curnode = child;
         }
         buf[i] = label[i];
     }
-    for (int i=0;i<node->numchildren;i++) {
-        if (streq(node->children[i]->label, buf)) {
-            node = node->children[i];
+    tree_node_t *node = NULL;
+    for (int i=0;i<curnode->numchildren;i++) {
+        if (streq(curnode->children[i]->label, buf)) {
+            node = curnode->children[i];
             break;
         }
     }

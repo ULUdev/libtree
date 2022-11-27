@@ -44,6 +44,7 @@ static void tree_add_and_find_node(void **state) {
 static void tree_get_nonexistent_node(void **state) {
     tree_t *tree = tree_new();
     tree_add_node(tree, ".", NULL);
+    tree_add_node(tree, "non.existent", NULL);
     assert_null(tree_get_node(tree, "non.existent.node"));
     tree_destroy(tree);
 }
