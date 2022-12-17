@@ -1,4 +1,5 @@
 libtree.so
+libtree.a
 test/mock
 compile_commands.json
 *.o

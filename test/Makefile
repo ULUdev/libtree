@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -std=c11 -Wall -I../include -ggdb
-LDFLAGS = -L.. -ltree -lcmocka
+LDFLAGS = -L.. -l:libtree.a -lcmocka
 
 all: mock
 
